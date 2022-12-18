@@ -7,7 +7,7 @@ WORKDIR /usr/src/bot
 COPY src/ .
 
 # Install dependencies.
-# Required? RUN pip install -U pip
+RUN pip install -U pip
 RUN pip install -r requirements.txt
 
 # Run main.py when started as container.
