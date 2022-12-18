@@ -4,7 +4,7 @@ FROM python:3.10
 # Setup a working directory and copy the source code to it.
 RUN mkdir -p /usr/src/bot
 WORKDIR /usr/src/bot
-COPY .src/ .
+COPY src/ .
 
 # Install dependencies.
 # Required? RUN pip install -U pip
