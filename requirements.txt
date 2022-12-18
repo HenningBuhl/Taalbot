@@ -1,0 +1,4 @@
+discord
+pytest
+pytest_asyncio
+dpytest

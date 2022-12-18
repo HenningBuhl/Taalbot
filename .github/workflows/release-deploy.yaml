@@ -1,0 +1,5 @@
+name: Deploy Bot (Release)
+
+on:
+  push:
+    branches: [ release ]
