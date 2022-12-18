@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+    bot:
+        container_name: taalbot
+        image: taalbot/taalbot:${TAALBOT_VERSION}
+        environment:
+            MYSQL_DATABASE: evatooldb
