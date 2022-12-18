@@ -15,16 +15,17 @@ Python version 3.10
 
 ### Testing Locally
 
-pytest --cov=src/
+Run from root dir:
+    pytest --cov=src/
 
 ## Workflow
 
 The dev branch is used for development (has github action for tests). [merge allowed from feature branches]
 The main branch contains the latest clean version of the bot (no actions). [merge allowed from dev branch]
 The experimental branch automatically deploys the experimental (test) version of the bot (actual discord bot). [merge allowed from dev/main branches]
-The release branch automatically deploys the actual bot. [merge allowed from main branche]
+The stable branch automatically deploys the actual bot. [merge allowed from main branche]
 
-## Credit
+[Attention: The deploy actions use the docker-compose from the main branch (pulled on remote server)]
 
 ## Planned Features
 
@@ -42,7 +43,9 @@ The release branch automatically deploys the actual bot. [merge allowed from mai
   - All secrets with env vars and with GitHub secrets!
   - Docker-compose + Docker image to dockerhub
   - Run tests on dev branch
-  - Deploy release and dev version on respective branch merges
+  - Deploy stable and experimental version on respective branch merges
+
+## Credit
 
 ## Contributing
 
