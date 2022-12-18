@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-    bot:
-        container_name: taalbot
-        image: ${DOCKERHUB_USERNAME}/taalbot:${TAALBOT_VERSION}
-        environment:
-            TOKEN: ${TOKEN}
+  bot:
+    container_name: taalbot
+    image: ${DOCKERHUB_USERNAME}/taalbot:${TAALBOT_VERSION}
+    environment:
+        TOKEN: ${TOKEN}
