@@ -44,7 +44,6 @@ jobs:
           SCRIPT: |
             cd taalbot-experimental
             git pull https://github.com/HenningBuhl/Taalbot
-            git fetch origin
             git checkout experimental
 
             TAALBOT_VERSION=experimental
