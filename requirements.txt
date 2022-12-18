@@ -2,3 +2,4 @@ discord
 pytest
 pytest_asyncio
 dpytest
+pytest-cov

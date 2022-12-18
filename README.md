@@ -13,18 +13,14 @@
 Python version 3.10
     install requirements
 
-### Testing the Bot Locally
+### Testing Locally
 
-Run tests locally:
-    navigate to test directory
-    Windows: py -m pytest
-    Linux: python3 -m pytest
+pytest --cov=src/
 
 ## Workflow
 
-
 The dev branch is used for development (has github action for tests). [merge allowed from feature branches]
-The main branch contains the latest clean version of the bot (no actions). [merge allowed from dev branche]
+The main branch contains the latest clean version of the bot (no actions). [merge allowed from dev branch]
 The experimental branch automatically deploys the experimental (test) version of the bot (actual discord bot). [merge allowed from dev/main branches]
 The release branch automatically deploys the actual bot. [merge allowed from main branche]
 
