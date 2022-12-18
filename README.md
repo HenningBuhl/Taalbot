@@ -21,8 +21,8 @@ Run from root dir:
 ## Workflow
 
 The dev branch is used for development (has github action for tests). [merge allowed from feature branches]
-The experimental branch automatically deploys the experimental (test) version of the bot (actual discord bot). [merge allowed from dev branches]
-The main branch automatically deploys the actual bot. [merge allowed from dev branch if tests are green + restrict permissions for that!]
+The experimental branch automatically deploys the experimental (test) version of the bot (actual discord bot). [merge allowed from dev branches, even if tests are red]
+The main branch automatically deploys the actual, real bot. [merge allowed from dev branch if tests are green]
 
 ## Planned Features
 
@@ -42,10 +42,6 @@ The main branch automatically deploys the actual bot. [merge allowed from dev br
   - Run tests on dev branch
   - Deploy stable and experimental version on respective branch merges
 
-## Credit
-
 ## Contributing
-
-## Conventions
 
 ## License
