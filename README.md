@@ -21,11 +21,8 @@ Run from root dir:
 ## Workflow
 
 The dev branch is used for development (has github action for tests). [merge allowed from feature branches]
-The main branch contains the latest clean version of the bot (no actions). [merge allowed from dev branch]
-The experimental branch automatically deploys the experimental (test) version of the bot (actual discord bot). [merge allowed from dev/main branches]
-The stable branch automatically deploys the actual bot. [merge allowed from main branche]
-
-[Attention: The deploy actions use the docker-compose from the main branch (pulled on remote server)]
+The experimental branch automatically deploys the experimental (test) version of the bot (actual discord bot). [merge allowed from dev branches]
+The main branch automatically deploys the actual bot. [merge allowed from dev branch if tests are green + restrict permissions for that!]
 
 ## Planned Features
 

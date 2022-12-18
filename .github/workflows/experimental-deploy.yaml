@@ -1,4 +1,4 @@
-name: Deploy Bot (Experimental)
+name: Deploy Bot (experimental)
 
 on:
   push:
@@ -34,20 +34,23 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
-      - name: Transfer checked-put Code to Remote Server
-      # TODO
-
       - name: Run docker-compose on Remote Server
         uses: appleboy/ssh-action@master
         env:
           HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USER }}
-          KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          PORT: ${{ secrets.PORT }}
+          USERNAME: ${{ secrets.HOST_USERNAME }}
+          KEY: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
+          PORT: ${{ secrets.HOST_PORT }}
           SCRIPT: |
-            cd taalbot
+            cd taalbot-experimental
             git pull https://github.com/HenningBuhl/Taalbot
+            git fetch origin
+            git checkout experimental
+
             TAALBOT_VERSION=experimental
+            DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            TOKEN=${{ secrets.TOKEN_EXPERIMENTAL }}
+            
             docker-compose down
             docker image rm ${{ secrets.DOCKERHUB_USERNAME }}/taalbot:experimental
             docker-compose up -d

@@ -1,5 +1,0 @@
-name: Deploy Bot (Stable)
-
-on:
-  push:
-    branches: [ stable ]

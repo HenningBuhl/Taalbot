@@ -1,0 +1,5 @@
+name: Deploy Bot (main)
+
+on:
+  push:
+    branches: [ main ]
