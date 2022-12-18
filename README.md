@@ -27,20 +27,18 @@ The main branch automatically deploys the actual, real bot. [merge allowed from 
 ## Planned Features
 
 - Rewrite bot functions
-  - Stateless
-  - Specification?
-  - Good folder structure
-  - no unnecessary files/classes/utils etc.
-  - decouple bot <-> server interactions (roles names etc.) in the most convenient manner
+  - [TODO] Redo old functions
+  - [DONE] New folder structure
+  - [TODO] decouple bot <-> server interactions (roles names etc.) in the most convenient manner
 - Write tests
-  - Use dpytest (https://dpytest.readthedocs.io/en/latest/tutorials/using_pytest.html)
-  - Test commands end to end
-  - Coverage %
+  - [DONE] Use dpytest (https://dpytest.readthedocs.io/en/latest/tutorials/using_pytest.html)
+  - [TODO] Test commands end to end
+  - [DONE] Coverage %
 - Build ci pipeline
-  - All secrets with env vars and with GitHub secrets!
-  - Docker-compose + Docker image to dockerhub
-  - Run tests on dev branch
-  - Deploy stable and experimental version on respective branch merges
+  - [TODO] All secrets with env vars and with GitHub secrets!
+  - [TODO] Docker-compose + Docker image to dockerhub
+  - [DONE] Run tests on dev branch
+  - [TODO] Deploy stable and experimental version on respective branch merges
 
 ## Contributing
 
