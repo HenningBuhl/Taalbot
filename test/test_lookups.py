@@ -3,8 +3,6 @@ sys.path.insert(0, 'src')
 
 
 from taalbot import Taalbot
-
-
 import pytest
 
 
