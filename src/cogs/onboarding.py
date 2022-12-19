@@ -1,3 +1,4 @@
+import discord
 from discord.ext import commands
 from discord.utils import get, find
 from guildconfig import *
@@ -12,10 +13,31 @@ class Onboarding(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        # Step 0: Remove all onboarding-process-related roles from the user.
-        # TODO
-      
-        # Step 1: DM the new user with an introduction.        
+        # Step 1: Remove all onboarding-process-related roles from the user.
+        reset_roles = [
+            ROLE_NAME_NATIVE,
+            ROLE_NAME_NL,
+            ROLE_NAME_BE,
+            ROLE_NAME_SA,
+            ROLE_NAME_LEVEL_O,
+            ROLE_NAME_LEVEL_A,
+            ROLE_NAME_LEVEL_B,
+            ROLE_NAME_LEVEL_C,
+            ROLE_NAME_WVDD,
+            ROLE_NAME_SESSIONS,
+            ROLE_NAME_CORRECT_ME,
+            ROLE_NAME_BN,
+        ]
+        
+        # Reset roles if they are in the above list and the member has them.
+        reset_roles = [role for role in member.guild.roles if role.name in reset_roles and role in member.guild.roles]
+        
+        # Reset roles if they have the country role color and the member has them.
+        reset_roles.extend([role for role in member.guild.roles if role.colour == discord.Colour(COUNTRY_ROLE_COLOR) and role in member.roles])
+        
+        await member.remove_roles(*reset_roles)
+
+        # Step 2: DM the new user with an introduction.        
         text = ('Hello, and welcome to **Nederlands Leren**! Let me introduce myself: I am taalbot, a bot that does things. I primarily live on this server.'
             'I would like to walk you through our introduction process, so that you can experience the server to its fullest in no time!\n'
             'For now, you only have access to a few channels, but there are many more!'
@@ -25,7 +47,7 @@ class Onboarding(commands.Cog):
         choices = {'▶️': None}
         self.prompt(member, text, choices)
         
-        # Step 2: Ask the user if they are a native speaker or not.
+        # Step 3: Ask the user if they are a native speaker or not.
         text = ('Right, first things first, let\'s talk about your proficiency.'
                 'Are you a **native Dutch speaker**?')
         choices = {
@@ -34,7 +56,7 @@ class Onboarding(commands.Cog):
         }
         reaction = self.prompt(member, text, choices)
         
-        # Step 3.1: If the user is a native speaker, ask which version of dutch they speak.
+        # Step 4.1: If the user is a native speaker, ask which version of dutch they speak.
         if reaction == '👍':
             text = ('OK! Which Dutch do you speak?\n'
                     '🇳🇱 The Netherlands'
@@ -47,7 +69,7 @@ class Onboarding(commands.Cog):
             }
             self.prompt(member, text, choices)
             
-        # Step 3.2: If the user is not a native speaker, ask which level of dutch they speak.
+        # Step 4.2: If the user is not a native speaker, ask which level of dutch they speak.
         else:  # reaction == '👎'
             text = ('OK! What is your current Dutch level?'
                     'Are you unsure, or need more info? Check https://en.wikipedia.org/wiki/Common_European_Framework_of_Reference_for_Languages#Common_reference_levels.\n'
@@ -63,7 +85,7 @@ class Onboarding(commands.Cog):
             }
             self.prompt(member, text, choices)
 
-        # Step 4: Ask the user wihich country they are from.
+        # Step 5: Ask the user wihich country they are from.
         text = ('We\'re making progress! Now, if you want, you can tell me the name of the **country you live in**.\n'
                 'I said earlier that we\'d communicate via reactions, but there are far too many different options!'
                 'For this time only, I am asking you to *type* the country name (in Dutch!)'
@@ -78,7 +100,7 @@ class Onboarding(commands.Cog):
         # message=f'🌍 Great! I added the **{country}** role to your profile!'
         self.prompt(member, text, choices)
         
-        # Step 5: Ask the user if they want additional roles.
+        # Step 6: Ask the user if they want additional roles.
         text = ('Awesome, you\'re *almost* set! 🥳'
                 'There are still a few optional roles you can decide to add to your profile.'
                 '*Note*: these roles can also be obtained later, should you ever change your mind.\n'
@@ -96,7 +118,7 @@ class Onboarding(commands.Cog):
         }
         self.prompt(member, text, choices, allow_multiple=True, terminate_choice='✅')
         
-        # Step 6: Send the user a friendly goodbye message.
+        # Step 7: Send the user a friendly goodbye message.
         text = ('Phew, finally done!'
                 f'Take a look at <#{ALGEMEEN_GENERAL_CHANNEL_ID}>, as I believe people there just gave you, or will give you, a warm welcome! (Let me know if they don\'t, though!)'
                 f'Make sure to read the rules in <#{INFORMATIE_CHANNEL_ID}>, too!'
@@ -164,3 +186,14 @@ class Action():
     def __init__(self, role=None, message=None):
         self.role = role
         self.message = message
+
+
+class Country():
+    def __init__(self, dutch_name, emoji, aliases=[]):
+        self.dutch_name = dutch_name
+        self.emoji = emoji
+        self.aliases = aliases
+
+countries = [
+    Country('', ''),
+]

@@ -20,3 +20,6 @@ ROLE_NAME_WVDD = "Woord"
 ROLE_NAME_SESSIONS = "Sessies"
 ROLE_NAME_CORRECT_ME = "Verbeter mij"
 ROLE_NAME_BN = "BN"
+
+# Role colors.
+COUNTRY_ROLE_COLOR = 0xa5b3bd
