@@ -16,7 +16,7 @@ Python version 3.10
 ### Testing Locally
 
 Run from root dir:
-    pytest --cov=src/
+    pytest --capture=sys --cov=src/
 
 ## Workflow
 
