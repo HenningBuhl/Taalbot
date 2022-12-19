@@ -5,8 +5,9 @@ from guildconfig import GREETING_CHANNEL
 
 class Greeting(commands.Cog):
     '''
-    TODO
+    Greets newly joined members with a friendy welcome message.
     '''
+    
     def __init__(self, bot):
         self.bot = bot
 

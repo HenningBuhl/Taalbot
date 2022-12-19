@@ -1,4 +1,5 @@
 import discord
+import asyncio
 from discord.ext import commands
 from discord.utils import get, find
 from guildconfig import *
@@ -6,35 +7,27 @@ from guildconfig import *
 
 class Onboarding(commands.Cog):
     '''
-    TODO
+    DMs newly joined members and guides them through the onboarding process and assigns roles depending
+    on their reactions.
     '''
+    
     def __init__(self, bot):
         self.bot = bot
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        # Step 1: Remove all onboarding-process-related roles from the user.
+        # Step 1: Remove all onboarding-related roles from the user.
         reset_roles = [
-            ROLE_NAME_NATIVE,
-            ROLE_NAME_NL,
-            ROLE_NAME_BE,
-            ROLE_NAME_SA,
-            ROLE_NAME_LEVEL_O,
-            ROLE_NAME_LEVEL_A,
-            ROLE_NAME_LEVEL_B,
-            ROLE_NAME_LEVEL_C,
-            ROLE_NAME_WVDD,
-            ROLE_NAME_SESSIONS,
-            ROLE_NAME_CORRECT_ME,
-            ROLE_NAME_BN,
+            ROLE_NAME_NATIVE, ROLE_NAME_NL, ROLE_NAME_BE, ROLE_NAME_SA,
+            ROLE_NAME_LEVEL_O, ROLE_NAME_LEVEL_A,ROLE_NAME_LEVEL_B, ROLE_NAME_LEVEL_C,
+            ROLE_NAME_WVDD, ROLE_NAME_SESSIONS, ROLE_NAME_CORRECT_ME, ROLE_NAME_BN,
         ]
         
-        # Reset roles if they are in the above list and the member has them.
-        reset_roles = [role for role in member.guild.roles if role.name in reset_roles and role in member.guild.roles]
+        # Reset roles that are: A role on the guild AND in the list above AND assigned to the member.
+        reset_roles = [role for role in member.guild.roles if role.name in reset_roles and role in member.roles]
         
-        # Reset roles if they have the country role color and the member has them.
+        # Reset roles that are: A role on the guild AND of the country color AND assigned to the member.
         reset_roles.extend([role for role in member.guild.roles if role.colour == discord.Colour(COUNTRY_ROLE_COLOR) and role in member.roles])
-        
         await member.remove_roles(*reset_roles)
 
         # Step 2: DM the new user with an introduction.        
@@ -88,17 +81,31 @@ class Onboarding(commands.Cog):
         # Step 5: Ask the user wihich country they are from.
         text = ('We\'re making progress! Now, if you want, you can tell me the name of the **country you live in**.\n'
                 'I said earlier that we\'d communicate via reactions, but there are far too many different options!'
-                'For this time only, I am asking you to *type* the country name (in Dutch!)'
+                'For this time only, I am asking you to *type* the country name (in Dutch! As a small exercise)'
                 'React with ⏩ to skip this step.\n'
-                'Example: **Nederland**\n'
-                'If you don\'t know what yours is, here is a list of country names in Dutch:'
-                'https://www.101languages.net/dutch/country-names-dutch/')
+                'Example: **Nederland**')
+                #'\nIf you don\'t know what yours is, here is a list of country names in Dutch:'
+                #'https://www.101languages.net/dutch/country-names-dutch/')
         choices = {
             '⏩': Action(message=f'Okay then, keep your secrets 👀.'),
         }
-        # TODO add all countries with loop?
+        
+        # Send prompt to user. TODO test this and move to method (just like prompt).
+        message = await member.send(text)
+        emojis = choices.keys()
+        done, pending = await asyncio.wait([
+                    self.bot.loop.create_task(self.bot.wait_for('message'), timeout=600,
+                                              check=lambda: reaction.message.id == message.id and str(reaction.emoji) in emojis),
+                    self.bot.loop.create_task(self.bot.wait_for('reaction_add'), timeout=600,
+                                              check=lambda: reaction.message.id == message.id and str(reaction.emoji) in emojis)
+                ], return_when=asyncio.FIRST_COMPLETED)
+
+        #country_role = find(lambda r: r.name.lower() == country_name_message.content.lower(), self.member.guild.roles)
+        #await self.member.add_roles(country_role)
+        #await self.member.send(g(self.role_assignation_text).format(country_role.name))
+        
         # message=f'🌍 Great! I added the **{country}** role to your profile!'
-        self.prompt(member, text, choices)
+        #self.prompt(member, text, choices)
         
         # Step 6: Ask the user if they want additional roles.
         text = ('Awesome, you\'re *almost* set! 🥳'
@@ -165,7 +172,7 @@ class Onboarding(commands.Cog):
         return reaction
 
     async def perform(action, member):
-        '''Performs all steps in an action if they are not None.'''
+        '''Performs steps in an action if they are not None.'''
         if action.role is not None:
             # Assign role to user.
             role = get(member.guild.roles, name=action.role)

@@ -1,7 +1,6 @@
 import discord
-
-
 from cogs.greeting import Greeting
+from cogs.onboarding import Onboarding
 
 
 class Taalbot(discord.ext.commands.Bot):
@@ -23,3 +22,4 @@ class Taalbot(discord.ext.commands.Bot):
 
     async def add_cogs(self):
         await self.add_cog(Greeting(self))
+        await self.add_cog(Onboarding(self))

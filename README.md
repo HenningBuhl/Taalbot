@@ -30,6 +30,7 @@ The main branch automatically deploys the actual, real bot. [merge allowed from 
   - [TODO] Redo old functions
   - [DONE] New folder structure
   - [TODO] decouple bot <-> server interactions (roles names etc.) in the most convenient manner
+  - [TODO] revamp logging (locally and on guild)
 - Write tests
   - [DONE] Use dpytest (https://dpytest.readthedocs.io/en/latest/tutorials/using_pytest.html)
   - [TODO] Test commands end to end
@@ -38,7 +39,7 @@ The main branch automatically deploys the actual, real bot. [merge allowed from 
   - [TODO] All secrets with env vars and with GitHub secrets!
   - [TODO] Docker-compose + Docker image to dockerhub
   - [DONE] Run tests on dev branch
-  - [TODO] Deploy stable and experimental version on respective branch merges
+  - [TODO] Deploy main and experimental version on respective branch merges/commits
 
 ## Contributing
 
