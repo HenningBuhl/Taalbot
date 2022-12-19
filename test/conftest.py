@@ -5,13 +5,9 @@ sys.path.insert(0, 'src')
 import glob
 import os
 import pytest_asyncio
-import discord
-import discord.ext.commands as commands
 import discord.ext.test as dpytest
-from discord.ext.commands import Cog, command
 from taalbot import Taalbot
-from cogs.greeting import Greeting
-from guildconfig import GREETING_CHANNEL, LOGGING_CHANNEL
+from guildconfig import *
 
 
 @pytest_asyncio.fixture
@@ -26,22 +22,37 @@ async def bot():
     config = dpytest.get_config()
     
     # Create the guild.
-    guild = dpytest.back.make_guild(name='Nederlands Leren', id_num=874659874358)
+    guild = dpytest.back.make_guild(name='Nederlands Leren')
     
     # Create the channels.
-    greeting_channel = dpytest.back.make_text_channel(GREETING_CHANNEL, guild)
-    log_channel = dpytest.back.make_text_channel(LOGGING_CHANNEL, guild)
+    greeting_channel = dpytest.back.make_text_channel(name=GREETING_CHANNEL, guild=guild)
+    log_channel = dpytest.back.make_text_channel(name=LOGGING_CHANNEL, guild=guild)
     channels = [greeting_channel, log_channel]
     
-    # Create members.
-    # TODO
-    
     # Create roles.
-    # TODO
+    dpytest.back.make_role(name=ROLE_NAME_STAFF, guild=guild)
+    dpytest.back.make_role(name=ROLE_NAME_NATIVE, guild=guild)
+    dpytest.back.make_role(name=ROLE_NAME_NL, guild=guild)
+    dpytest.back.make_role(name=ROLE_NAME_BE, guild=guild)
+    dpytest.back.make_role(name=ROLE_NAME_SA, guild=guild)
+    dpytest.back.make_role(name=ROLE_NAME_LEVEL_O, guild=guild)
+    dpytest.back.make_role(name=ROLE_NAME_LEVEL_A, guild=guild)
+    dpytest.back.make_role(name=ROLE_NAME_LEVEL_B, guild=guild)
+    dpytest.back.make_role(name=ROLE_NAME_LEVEL_C, guild=guild)
+    dpytest.back.make_role(name=ROLE_NAME_WVDD, guild=guild)
+    dpytest.back.make_role(name=ROLE_NAME_SESSIONS, guild=guild)
+    dpytest.back.make_role(name=ROLE_NAME_CORRECT_ME, guild=guild)
+    dpytest.back.make_role(name=ROLE_NAME_BN, guild=guild)
+
+    # Create members.
+    test_user = dpytest.back.make_user(username='ManualTestUser', discrim=1)
+    test_member = dpytest.back.make_member(user=test_user, guild=guild, nick='ManualTestNickName')
+    members = [test_member]
     
     # Assign the test setup to the config.
     config.guilds.append(guild)
-    config.channels.extend(channels)
+    config.channels.append(channels)
+    config.members.append(members)
     
     return bot
 

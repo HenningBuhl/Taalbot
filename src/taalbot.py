@@ -7,10 +7,7 @@ from cogs.greeting import Greeting
 class Taalbot(discord.ext.commands.Bot):
     def __init__(self):
         # Intents of bot.
-        intents = discord.Intents.default()
-        intents.messages = True
-        intents.guilds = True
-        intents.members = True
+        intents = discord.Intents.all()
 
         # Activity and status of bot.
         activity = discord.Game(name="I'm helping 👀")
