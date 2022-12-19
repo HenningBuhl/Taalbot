@@ -6,6 +6,3 @@ services:
     image: ${DOCKERHUB_USERNAME}/taalbot:${TAALBOT_VERSION}
     environment:
       TOKEN: ${TOKEN}
-      PORT: ?? #or use:
-    ports:
-      - "81:80" # host:container
