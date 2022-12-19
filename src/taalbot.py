@@ -1,5 +1,7 @@
-import os
 import discord
+
+
+from cogs.greeting import Greeting
 
 
 class Taalbot(discord.Client):
@@ -14,11 +16,13 @@ class Taalbot(discord.Client):
         activity = discord.Game(name="TODO")
         status = discord.Status.online
 
-        super().__init__(intents=intents, activity=activity, status=status)
+        # Pass arguments to super constructor.
+        super().__init__(command_prefix='??', intents=intents, activity=activity, status=status)
 
     async def on_ready(self):
-        # Add cogs (order matters for checking order and help command).
-        # TODO
-        #await self.add_cog(Misc())
+        print('Taalbot is preparing...')
+        
+        # Add cogs to the bot.
+        await self.add_cog(Greeting(self))
 
         print("Taalbot is now ready.")

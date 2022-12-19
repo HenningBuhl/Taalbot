@@ -45,7 +45,7 @@ jobs:
             cd taalbot-experimental
             git pull https://github.com/HenningBuhl/Taalbot
             git checkout experimental
-
+            
             TAALBOT_VERSION=experimental
             DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
             TOKEN=${{ secrets.TOKEN_EXPERIMENTAL }}
