@@ -15,7 +15,7 @@
 Create two folders ("taalbot", "taalbot-experimental") in user dir on server
 Install git
 Install docker
-Setup private key (save in GitHub Secret "HOST_SSH_PRIVATE_KEY") [https://github.com/appleboy/ssh-action#setting-up-ssh-key]
+Setup private key (save in GitHub Secret "HOST_SSH_PRIVATE_KEY") [https://github.com/appleboy/ssh-action#setting-up-ssh-key] Look out for b@B (user@host) and the ssh port!
 Create docker user group to GitHub Actions can use docker?
 
 ### Installation
