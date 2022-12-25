@@ -8,6 +8,15 @@
 
 ## Getting Started
 
+### Repo Setup
+
+### Server Setup
+
+Install git
+Install docker
+Setup private key (save in GitHub Secret "HOST_SSH_PRIVATE_KEY")
+Create docker user group to GitHub Actions can use docker?
+
 ### Installation
 
 Python version 3.10
