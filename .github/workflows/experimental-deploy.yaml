@@ -43,7 +43,7 @@ jobs:
           PORT: ${{ secrets.HOST_SSH_PORT }}
           SCRIPT: |
             cd taalbot-experimental
-            git pull https://github.com/HenningBuhl/Taalbot.git
+            git clone https://github.com/HenningBuhl/Taalbot.git
             git checkout experimental
             
             TAALBOT_VERSION=experimental
