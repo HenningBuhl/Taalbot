@@ -44,6 +44,7 @@ jobs:
           SCRIPT: |
             cd taalbot-experimental
             git clone https://github.com/HenningBuhl/Taalbot.git
+            cd Taalbot
             git checkout experimental
             
             TAALBOT_VERSION=experimental
