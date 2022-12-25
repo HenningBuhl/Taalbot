@@ -54,3 +54,6 @@ jobs:
             docker-compose down
             docker image rm ${{ secrets.DOCKERHUB_USERNAME }}/taalbot:experimental
             docker-compose up -d
+
+            cd ..
+            rm -rf Taalbot
