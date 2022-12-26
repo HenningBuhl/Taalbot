@@ -28,5 +28,4 @@ jobs:
 
       - name: Lint with Pylint
         run: |
-          ls -al
           pylint src
