@@ -38,7 +38,7 @@ Run from root dir:
 ### Linting Locally
 
 Run from root dir:
-    pylint ./src
+    pylint src
 
 ## Workflow
 
