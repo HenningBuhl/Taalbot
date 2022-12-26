@@ -5,4 +5,4 @@ services:
     container_name: taalbot
     image: ${DOCKERHUB_USERNAME}/taalbot:${TAALBOT_VERSION}
     environment:
-      TOKEN: ${TOKEN}
+      TOKEN: ${DISCORD_BOT_TOKEN}

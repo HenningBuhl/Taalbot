@@ -49,7 +49,7 @@ jobs:
             
             export TAALBOT_VERSION=experimental
             export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
-            export TOKEN=${{ secrets.DISCORD_BOT_TOKEN_EXPERIMENTAL }}
+            export DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN_EXPERIMENTAL }}
 
             docker-compose down
             docker image rm ${{ secrets.DOCKERHUB_USERNAME }}/taalbot:experimental
