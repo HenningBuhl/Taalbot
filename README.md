@@ -53,10 +53,11 @@ The main branch automatically deploys the actual, real bot. [merge allowed from 
   - [TODO] Test commands end to end
   - [DONE] Coverage %
 - Build ci pipeline
-  - [TODO] All secrets with env vars and with GitHub secrets!
-  - [TODO] Docker-compose + Docker image to dockerhub
+  - [DONE] All secrets with env vars and with GitHub secrets!
+  - [DONE] Docker-compose + Docker image to dockerhub
   - [DONE] Run tests on dev branch
-  - [TODO] Deploy main and experimental version on respective branch merges/commits
+  - [DONE] Write GitHub Action that deploys with docker-compose
+  - [TODO] Make bot run in docker
 
 ## Contributing
 
