@@ -47,9 +47,9 @@ jobs:
             cd Taalbot
             git checkout experimental
             
-            TAALBOT_VERSION=experimental
-            DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
-            TOKEN=${{ secrets.TOKEN_EXPERIMENTAL }}
+            export TAALBOT_VERSION=experimental
+            export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            export TOKEN=${{ secrets.DISCORD_BOT_TOKEN_EXPERIMENTAL }}
 
             docker-compose down
             docker image rm ${{ secrets.DOCKERHUB_USERNAME }}/taalbot:experimental
