@@ -28,12 +28,17 @@ Add main branch protection via dev test action
 ### Installation
 
 Python version 3.10
-    install requirements
+    install requirements-dev.txt
 
 ### Testing Locally
 
 Run from root dir:
     pytest --capture=sys --cov=src/
+
+### Linting Locally
+
+Run from root dir:
+    pylint src
 
 ## Workflow
 
