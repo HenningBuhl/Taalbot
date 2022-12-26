@@ -6,8 +6,8 @@ RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 # Install dependencies.
-COPY requirements.txt .
-RUN apt-get update && pip install -r requirements.txt
+COPY requirements-prod.txt .
+RUN apt-get update && pip install -r requirements-prod.txt
 
 # Run stage.
 FROM python:3.10-slim
