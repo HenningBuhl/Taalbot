@@ -7,9 +7,9 @@ on:
     branches: [ dev ]
 
 jobs:
-  test:
+  lint:
 
-    name: Test
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
